@@ -16,11 +16,21 @@ export const validate = (schemas: ValidationSchemas) => {
       }
 
       if (schemas.query) {
-        (req as any).query = schemas.query.parse(req.query);
+        Object.defineProperty(req, "query", {
+          value: schemas.query.parse(req.query),
+          configurable: true,
+          enumerable: true,
+          writable: true
+        });
       }
 
       if (schemas.params) {
-        (req as any).params = schemas.params.parse(req.params);
+        Object.defineProperty(req, "params", {
+          value: schemas.params.parse(req.params),
+          configurable: true,
+          enumerable: true,
+          writable: true
+        });
       }
 
       next();

@@ -4,6 +4,39 @@ A production-style finance backend built with `TypeScript`, `Express`, `PostgreS
 
 This project was built for the Zorvyn Backend Developer Internship assignment and focuses on backend engineering quality rather than frontend UI work.
 
+## Quick Start for Reviewers
+
+Anyone can run this project locally by following the steps below.
+
+### Prerequisites
+
+- Node.js
+- npm
+- PostgreSQL or Docker
+
+### Fastest Local Run
+
+```bash
+npm install
+cp .env.example .env
+npm run prisma:generate
+npm run prisma:migrate -- --name init
+npm run dev
+```
+
+If you use Docker for PostgreSQL, start it first:
+
+```bash
+docker compose up -d
+```
+
+After the server starts, open:
+
+- Health check: `http://localhost:5000/api/health`
+- Swagger docs: `http://localhost:5000/api/docs`
+
+For a more guided review flow, see `REVIEWER_GUIDE.md`.
+
 ## Features
 
 ### Authentication and Authorization
