@@ -4,5 +4,8 @@ module.exports = {
   roots: ["<rootDir>/tests"],
   moduleFileExtensions: ["ts", "js", "json"],
   setupFiles: ["<rootDir>/tests/setup.ts"],
-  clearMocks: true
+  clearMocks: true,
+  transform: {
+    "^.+\\.ts$": ["ts-jest", { tsconfig: "tsconfig.test.json" }]
+  }
 };
