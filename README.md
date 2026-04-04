@@ -1,8 +1,15 @@
-# Finance Backend API: Zorvyn Backend Developer Internship Assignment
+ï»¿# Finance Backend API: Zorvyn Backend Developer Internship Assignment
 
 A production-style finance backend built with `TypeScript`, `Express`, `PostgreSQL`, and `Prisma`, designed for secure financial record management, role-based access control, dashboard analytics, API documentation, and recruiter-friendly backend evaluation.
 
 This project was built for the Zorvyn Backend Developer Internship assignment and focuses on backend engineering quality rather than frontend UI work.
+
+## Live Review URL
+
+This backend is also deployed for reviewer convenience:
+
+- Hosted health check: `https://zorvyn-finance-backend-42za.onrender.com/api/health`
+- Hosted Swagger docs: `https://zorvyn-finance-backend-42za.onrender.com/api/docs`
 
 ## Quick Start for Reviewers
 
@@ -111,21 +118,21 @@ For a more guided review flow, see `REVIEWER_GUIDE.md`.
 ```text
 zorvyn/
 +-- prisma/
-¦   +-- migrations/
-¦   +-- schema.prisma
+Â¦   +-- migrations/
+Â¦   +-- schema.prisma
 +-- src/
-¦   +-- config/
-¦   +-- controllers/
-¦   +-- docs/
-¦   +-- lib/
-¦   +-- middlewares/
-¦   +-- routes/
-¦   +-- schemas/
-¦   +-- services/
-¦   +-- types/
-¦   +-- utils/
-¦   +-- app.ts
-¦   +-- server.ts
+Â¦   +-- config/
+Â¦   +-- controllers/
+Â¦   +-- docs/
+Â¦   +-- lib/
+Â¦   +-- middlewares/
+Â¦   +-- routes/
+Â¦   +-- schemas/
+Â¦   +-- services/
+Â¦   +-- types/
+Â¦   +-- utils/
+Â¦   +-- app.ts
+Â¦   +-- server.ts
 +-- tests/
 +-- .env.example
 +-- docker-compose.yml
@@ -193,6 +200,11 @@ Once the app is running:
 
 - Health check: `http://localhost:5000/api/health`
 - Swagger docs: `http://localhost:5000/api/docs`
+
+Hosted review URLs:
+
+- Health check: `https://zorvyn-finance-backend-42za.onrender.com/api/health`
+- Swagger docs: `https://zorvyn-finance-backend-42za.onrender.com/api/docs`
 
 ## API Modules
 
@@ -280,3 +292,4 @@ Do not upload:
 - `node_modules/`
 - `dist/`
 - real credentials or secrets
+
