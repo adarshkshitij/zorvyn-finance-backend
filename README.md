@@ -25,7 +25,7 @@ Anyone can run this project locally by following the steps below.
 
 ```bash
 npm install
-cp .env.example .env
+# Create .env from .env.example
 npm run prisma:generate
 npm run prisma:migrate -- --name init
 npm run dev
@@ -95,7 +95,7 @@ For a more guided review flow, see `REVIEWER_GUIDE.md`.
 
 - TypeScript strict mode
 - Prisma ORM with PostgreSQL
-- Automated tests using Jest and Supertest
+- Basic automated tests for health, docs, and auth protection using Jest and Supertest
 - Docker Compose for local PostgreSQL setup
 - Clean modular folder structure
 
@@ -126,6 +126,7 @@ zorvyn/
 ¦   +-- docs/
 ¦   +-- lib/
 ¦   +-- middlewares/
+¦   +-- models/
 ¦   +-- routes/
 ¦   +-- schemas/
 ¦   +-- services/
