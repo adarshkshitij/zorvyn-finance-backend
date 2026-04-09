@@ -257,6 +257,22 @@ The application follows a modular service-oriented Express structure:
 
 This structure keeps transport concerns separate from business logic and makes the codebase easier to extend, test, and review.
 
+```mermaid
+flowchart LR
+    U[Client Apps<br/>Swagger / Postman / Frontend] --> R[Express Routes]
+    R --> V[Validation Middleware]
+    V --> A[Authentication Middleware]
+    A --> RBAC[Role Authorization]
+    RBAC --> C[Controllers]
+    C --> S[Services]
+    S --> P[Prisma ORM]
+    P --> DB[(PostgreSQL)]
+    C --> E[Centralized Error Handler]
+    S --> RESP[API Response Builder]
+    E --> OUT[JSON Response]
+    RESP --> OUT
+```
+
 ## Role Permissions Matrix
 
 | Role | Users | Records | Summaries |
@@ -264,6 +280,17 @@ This structure keeps transport concerns separate from business logic and makes t
 | `admin` | Full management access | Create, read, update, delete | Read |
 | `analyst` | No access | Read | Read |
 | `viewer` | No access | Read | Read |
+
+```mermaid
+flowchart TD
+    Admin[Admin] --> U1[Manage Users]
+    Admin --> R1[Create / Update / Delete Records]
+    Admin --> S1[View Summaries]
+    Analyst[Analyst] --> R2[Read Records]
+    Analyst --> S2[View Summaries]
+    Viewer[Viewer] --> R3[Read Records]
+    Viewer --> S3[View Summaries]
+```
 
 ## Validation and Error Strategy
 

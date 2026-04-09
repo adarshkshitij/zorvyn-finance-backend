@@ -23,6 +23,27 @@ The high-level request lifecycle is:
 7. A normalized API response is returned
 8. Centralized error middleware handles expected and unexpected failures
 
+```mermaid
+flowchart TD
+    A[Client Request] --> B[Express Route]
+    B --> C[Zod Validation]
+    C --> D[JWT Authentication]
+    D --> E[Role Check]
+    E --> F[Controller]
+    F --> G[Service Layer]
+    G --> H[Prisma]
+    H --> I[(PostgreSQL)]
+    G --> J[Formatted API Response]
+    B --> K[Error Middleware]
+    C --> K
+    D --> K
+    E --> K
+    F --> K
+    G --> K
+    J --> L[JSON Response]
+    K --> L
+```
+
 ## Layer Responsibilities
 
 ### Routes
@@ -53,6 +74,33 @@ Middlewares are used for:
 This keeps cross-cutting concerns reusable and consistent.
 
 ## Data Model
+
+```mermaid
+erDiagram
+    USER ||--o{ FINANCIAL_RECORD : creates
+
+    USER {
+        uuid id
+        string name
+        string email
+        string passwordHash
+        string role
+        string status
+        datetime lastLoginAt
+    }
+
+    FINANCIAL_RECORD {
+        uuid id
+        string title
+        decimal amount
+        string type
+        string category
+        date recordDate
+        string notes
+        boolean isDeleted
+        uuid createdById
+    }
+```
 
 ### User
 
@@ -88,6 +136,17 @@ The backend enforces authorization at the API layer instead of relying on fronte
 - `viewer` can read records and summaries
 
 This keeps permissions easy to audit and reason about.
+
+```mermaid
+flowchart LR
+    Admin[admin] --> A1[Users: manage]
+    Admin --> A2[Records: create/read/update/delete]
+    Admin --> A3[Summaries: read]
+    Analyst[analyst] --> B1[Records: read]
+    Analyst --> B2[Summaries: read]
+    Viewer[viewer] --> C1[Records: read]
+    Viewer --> C2[Summaries: read]
+```
 
 ## Summary Logic
 
