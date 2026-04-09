@@ -4,6 +4,14 @@ A production-style finance backend built with `TypeScript`, `Express`, `PostgreS
 
 This project was built for the Zorvyn Backend Developer Internship assignment and focuses on backend engineering quality rather than frontend UI work.
 
+## Why This Project Stands Out
+
+- Modular layered backend structure with clear separation of routes, controllers, services, schemas, and utilities
+- JWT authentication and role-based access control implemented at the API layer
+- Financial record CRUD paired with filtering, pagination, search, and summary analytics
+- Reviewer-friendly documentation through Swagger, Postman collection, setup instructions, and hosted links
+- CI-ready repository with automated build and test workflow
+
 ## Live Review URL
 
 This backend is also deployed for reviewer convenience:
@@ -96,6 +104,7 @@ For a more guided review flow, see `REVIEWER_GUIDE.md`.
 - TypeScript strict mode
 - Prisma ORM with PostgreSQL
 - Basic automated tests for health, docs, and auth protection using Jest and Supertest
+- GitHub Actions CI for automated build and test checks
 - Docker Compose for local PostgreSQL setup
 - Clean modular folder structure
 
@@ -234,6 +243,53 @@ Hosted review URLs:
 
 - `GET /api/summaries`
 
+## Architecture Overview
+
+The application follows a modular service-oriented Express structure:
+
+- `routes/` defines HTTP endpoints and middleware composition
+- `controllers/` handles request and response orchestration
+- `services/` contains business logic and database-facing operations
+- `schemas/` centralizes Zod validation for body, query, and params
+- `middlewares/` enforces authentication, role checks, validation, and error handling
+- `docs/` contains Swagger configuration for interactive API documentation
+- `lib/` and `utils/` hold shared infrastructure helpers and reusable utilities
+
+This structure keeps transport concerns separate from business logic and makes the codebase easier to extend, test, and review.
+
+## Role Permissions Matrix
+
+| Role | Users | Records | Summaries |
+| --- | --- | --- | --- |
+| `admin` | Full management access | Create, read, update, delete | Read |
+| `analyst` | No access | Read | Read |
+| `viewer` | No access | Read | Read |
+
+## Validation and Error Strategy
+
+- Request body, params, and query validation is handled with `Zod`
+- Invalid input returns consistent API error responses with appropriate status codes
+- Centralized error middleware normalizes unexpected failures
+- Authentication and authorization are enforced before protected controller logic executes
+
+## Assumptions and Trade-offs
+
+- The project intentionally prioritizes backend quality, API design, and maintainability over frontend delivery
+- A first-admin registration flow is used so the system can be initialized safely without open public signup
+- Soft delete is applied to financial records to preserve recoverability and safer data handling
+- JWT-based auth was chosen for simplicity and portability in a backend assignment setting
+- Viewer access is implemented as read-only access to records and summaries, while mutating actions remain admin-only
+
+## CI and Quality Checks
+
+This repository includes a GitHub Actions workflow that runs on every push and pull request to `main`:
+
+- `npm install`
+- `npm test`
+- `npm run build`
+
+This adds a stronger engineering signal for interviews and makes the repository easier to trust during review.
+
 ## Recommended Review Flow
 
 A reviewer can verify the project without any frontend by following this order:
@@ -265,6 +321,7 @@ npm run build
 ## Reviewer Assets Included
 
 - `REVIEWER_GUIDE.md`
+- `ARCHITECTURE.md`
 - `Zorvyn-Backend-Postman-Collection.json`
 - Swagger docs at `/api/docs`
 - `.env.example` for safe setup instructions
