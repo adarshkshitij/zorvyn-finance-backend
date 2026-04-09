@@ -1,31 +1,33 @@
-﻿# Finance Backend API: Zorvyn Backend Developer Internship Assignment
+# Zorvyn Finance Backend (API)
 
-A production-style finance backend built with `TypeScript`, `Express`, `PostgreSQL`, and `Prisma`, designed for secure financial record management, role-based access control, dashboard analytics, API documentation, and recruiter-friendly backend evaluation.
+A production-style finance backend API built with `TypeScript`, `Express`, `PostgreSQL`, and `Prisma`.
+It’s designed to be reviewer-friendly: clear layering, practical auth/RBAC, consistent validation + error handling, and Swagger-first API exploration.
 
-This project was built for the Zorvyn Backend Developer Internship assignment and focuses on backend engineering quality rather than frontend UI work.
+Built for the Zorvyn Backend Developer Internship assignment (backend-focused by design).
+
+## At a Glance (1–2 minutes)
+
+- **What it does:** Auth + RBAC + user management + financial record CRUD + dashboard-style summaries
+- **Where to start (review):** `REVIEWER_GUIDE.md`
+- **Key docs:** `ARCHITECTURE.md`, `DEPLOYMENT.md`, `OPERATIONS.md`, `DESIGN_NOTES.md`
+- **Main entry points:** `src/server.ts` (boot), `src/app.ts` (Express app), `prisma/schema.prisma` (data model)
+- **Live (hosted):**
+  - Health: `https://zorvyn-finance-backend-42za.onrender.com/api/health`
+  - Swagger: `https://zorvyn-finance-backend-42za.onrender.com/api/docs`
 
 ## Why This Project Stands Out
 
 - Modular layered backend structure with clear separation of routes, controllers, services, schemas, and utilities
 - JWT authentication and role-based access control implemented at the API layer
 - Financial record CRUD paired with filtering, pagination, search, and summary analytics
-- Reviewer-friendly documentation through Swagger, Postman collection, setup instructions, and hosted links
-- CI-ready repository with automated build and test workflow
-
-## Live Review URL
-
-This backend is also deployed for reviewer convenience:
-
-- Hosted health check: `https://zorvyn-finance-backend-42za.onrender.com/api/health`
-- Hosted Swagger docs: `https://zorvyn-finance-backend-42za.onrender.com/api/docs`
+- Reviewer-friendly documentation: Swagger, Postman collection, and guided review flow
+- CI workflow that runs `typecheck`, `test`, and `build` on every PR
 
 ## Quick Start for Reviewers
 
-Anyone can run this project locally by following the steps below.
-
 ### Prerequisites
 
-- Node.js
+- Node.js (>= 20)
 - npm
 - PostgreSQL or Docker
 
@@ -50,7 +52,7 @@ After the server starts, open:
 - Health check: `http://localhost:5000/api/health`
 - Swagger docs: `http://localhost:5000/api/docs`
 
-For a more guided review flow, see `REVIEWER_GUIDE.md`.
+For a guided “review journey”, see `REVIEWER_GUIDE.md`.
 
 ## Features
 
@@ -96,31 +98,23 @@ For a more guided review flow, see `REVIEWER_GUIDE.md`.
 - Interactive Swagger UI
 - Zod-based request validation
 - Consistent success / error response structure
-- Reviewer-friendly setup flow
 - Postman collection included for manual review
 
 ### Quality and Tooling
 
 - TypeScript strict mode
 - Prisma ORM with PostgreSQL
-- Basic automated tests for health, docs, and auth protection using Jest and Supertest
-- GitHub Actions CI for automated build and test checks
+- Automated tests for key infrastructure behavior (health/docs/auth guard) using Jest + Supertest
+- GitHub Actions CI for typecheck, test, and build
 - Docker Compose for local PostgreSQL setup
-- Clean modular folder structure
 
 ## Tech Stack
 
-- TypeScript
-- Node.js
-- Express.js
-- PostgreSQL
-- Prisma ORM
-- Zod
-- JWT
-- Swagger UI
-- Jest
-- Supertest
-- Docker Compose
+- TypeScript, Node.js, Express.js
+- PostgreSQL + Prisma
+- Zod, JWT, Swagger UI
+- Jest + Supertest
+- Docker Compose (local DB)
 
 ## Project Structure
 
@@ -129,9 +123,9 @@ zorvyn-finance-backend/
 ├── src/
 │   ├── app.ts                # Express app setup
 │   ├── server.ts             # Server entry point
-│   ├── routes/               # Endpoint definitions
-│   ├── controllers/          # Request / response orchestration
-│   ├── services/             # Business logic and Prisma operations
+│   ├── routes/               # Endpoint definitions (path + middleware)
+│   ├── controllers/          # Request/response orchestration
+│   ├── services/             # Business logic + Prisma queries
 │   ├── middlewares/          # Auth, RBAC, validation, error handling
 │   ├── schemas/              # Zod validation schemas
 │   ├── docs/                 # Swagger configuration
@@ -146,25 +140,25 @@ zorvyn-finance-backend/
 ├── .github/workflows/        # CI workflow
 ├── ARCHITECTURE.md           # Architecture and design notes
 ├── REVIEWER_GUIDE.md         # Reviewer-focused quick start
+├── DEPLOYMENT.md             # Deployment notes (Render-friendly)
+├── OPERATIONS.md             # Runbook/troubleshooting
+├── DESIGN_NOTES.md           # Scope, trade-offs, and next steps
 ├── docker-compose.yml        # Local PostgreSQL setup
 ├── .env.example              # Safe environment template
-└── README.md                 # Project overview and setup guide
+└── README.md                 # Overview + setup + review map
 ```
-
-This layout keeps request handling, business logic, validation, database access, and documentation clearly separated, which makes the backend easier to review and maintain.
 
 ```mermaid
 flowchart TD
-    ROOT[zorvyn-finance-backend] --> SRC[src]
+    ROOT[repo root] --> SRC[src]
     ROOT --> PRISMA[prisma]
     ROOT --> TESTS[tests]
     ROOT --> CI[.github/workflows]
-    ROOT --> DOCS[README + ARCHITECTURE + REVIEWER_GUIDE]
+    ROOT --> DOCS[docs (*.md)]
     SRC --> ROUTES[routes]
     SRC --> CONTROLLERS[controllers]
     SRC --> SERVICES[services]
     SRC --> MIDDLEWARES[middlewares]
-    SRC --> SCHEMAS[schemas]
     SERVICES --> ORM[Prisma ORM]
     ORM --> DB[(PostgreSQL)]
 ```
@@ -259,17 +253,13 @@ Hosted review URLs:
 
 ## Architecture Overview
 
-The application follows a modular service-oriented Express structure:
+The application follows a modular, service-oriented Express structure:
 
-- `routes/` defines HTTP endpoints and middleware composition
-- `controllers/` handles request and response orchestration
-- `services/` contains business logic and database-facing operations
-- `schemas/` centralizes Zod validation for body, query, and params
-- `middlewares/` enforces authentication, role checks, validation, and error handling
-- `docs/` contains Swagger configuration for interactive API documentation
-- `lib/` and `utils/` hold shared infrastructure helpers and reusable utilities
-
-This structure keeps transport concerns separate from business logic and makes the codebase easier to extend, test, and review.
+- `routes/` defines endpoint paths + middleware composition
+- `controllers/` stay lightweight and orchestrate requests/responses
+- `services/` hold business logic and Prisma queries
+- `schemas/` centralize Zod validation for body/query/params
+- `middlewares/` enforce auth, RBAC, validation, and consistent errors
 
 ```mermaid
 flowchart LR
@@ -287,6 +277,8 @@ flowchart LR
     RESP --> OUT
 ```
 
+For deeper details (request flow, ER diagram, access control), see `ARCHITECTURE.md`.
+
 ## Role Permissions Matrix
 
 | Role | Users | Records | Summaries |
@@ -295,45 +287,29 @@ flowchart LR
 | `analyst` | No access | Read | Read |
 | `viewer` | No access | Read | Read |
 
-```mermaid
-flowchart TD
-    Admin[Admin] --> U1[Manage Users]
-    Admin --> R1[Create / Update / Delete Records]
-    Admin --> S1[View Summaries]
-    Analyst[Analyst] --> R2[Read Records]
-    Analyst --> S2[View Summaries]
-    Viewer[Viewer] --> R3[Read Records]
-    Viewer --> S3[View Summaries]
-```
-
 ## Validation and Error Strategy
 
 - Request body, params, and query validation is handled with `Zod`
 - Invalid input returns consistent API error responses with appropriate status codes
 - Centralized error middleware normalizes unexpected failures
-- Authentication and authorization are enforced before protected controller logic executes
+- Authentication and authorization run before protected controller logic executes
 
 ## Assumptions and Trade-offs
 
-- The project intentionally prioritizes backend quality, API design, and maintainability over frontend delivery
-- A first-admin registration flow is used so the system can be initialized safely without open public signup
-- Soft delete is applied to financial records to preserve recoverability and safer data handling
-- JWT-based auth was chosen for simplicity and portability in a backend assignment setting
-- Viewer access is implemented as read-only access to records and summaries, while mutating actions remain admin-only
+- Backend-only by design (assignment scope: backend quality + maintainability)
+- First-admin registration initializes the system without open public signup
+- Soft delete for financial records (safer than hard deletes for admin flows)
+- JWT-based auth chosen for portability and simplicity
 
 ## CI and Quality Checks
 
-This repository includes a GitHub Actions workflow that runs on every push and pull request to `main`:
+GitHub Actions runs on every push and pull request to `main`:
 
-- `npm install`
+- `npm run typecheck`
 - `npm test`
 - `npm run build`
 
-This adds a stronger engineering signal for interviews and makes the repository easier to trust during review.
-
 ## Recommended Review Flow
-
-A reviewer can verify the project without any frontend by following this order:
 
 1. `GET /api/health`
 2. `POST /api/auth/register-admin`

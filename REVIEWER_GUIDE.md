@@ -2,11 +2,18 @@
 
 This project is a backend-only assignment and does not require a frontend application for evaluation.
 
-## How To Review Quickly
+## 60-Second Review (Hosted)
+
+- Swagger docs: `https://zorvyn-finance-backend-42za.onrender.com/api/docs`
+- Health check: `https://zorvyn-finance-backend-42za.onrender.com/api/health`
+
+If you’re reviewing locally instead, follow the quick start below.
+
+## Quick Local Review
 
 1. Clone the repository
 2. Create `.env` using `.env.example`
-3. Start PostgreSQL locally or via Docker
+3. Start PostgreSQL (Docker or local)
 4. Run:
 
 ```bash
@@ -25,7 +32,7 @@ npm run dev
 
 Use Swagger UI at `/api/docs`.
 
-You can test the backend directly in browser without building any frontend.
+You can test the backend directly in the browser without building any frontend.
 
 ## Alternate Review Method
 
@@ -43,9 +50,10 @@ Import `Zorvyn-Backend-Postman-Collection.json` into Postman and run the request
 8. `GET /api/records`
 9. `GET /api/summaries`
 
-## Notes
+## Docs Map (If You Want More Context)
 
-- This project uses `TypeScript + Express + PostgreSQL + Prisma`
-- Swagger is included for easier API review
-- Automated tests are included
-- `.env` should not be committed; use `.env.example` for setup
+- `ARCHITECTURE.md` — request flow, ER diagram, RBAC, trade-offs
+- `DEPLOYMENT.md` — environment variables + migrations + deploy flow
+- `OPERATIONS.md` — runbook/troubleshooting
+- `DESIGN_NOTES.md` — scope, rationale, next improvements
+

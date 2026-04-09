@@ -1,15 +1,23 @@
 {
-  "name": "zorvyn",
+  "name": "zorvyn-finance-backend",
   "version": "1.0.0",
-  "description": "Finance data processing and access control backend assignment",
+  "description": "Production-style finance backend API with RBAC, analytics, Swagger docs, and a reviewer-friendly architecture (TypeScript + Express + PostgreSQL + Prisma).",
   "main": "dist/src/server.js",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/src/server.js",
     "test": "jest --runInBand",
+    "test:watch": "jest --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "check": "npm run typecheck && npm run test && npm run build",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:studio": "prisma studio"
   },
   "keywords": [
