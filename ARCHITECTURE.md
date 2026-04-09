@@ -73,6 +73,17 @@ Middlewares are used for:
 
 This keeps cross-cutting concerns reusable and consistent.
 
+```mermaid
+flowchart LR
+    Routes --> Controllers
+    Controllers --> Services
+    Routes --> Middlewares
+    Routes --> Schemas
+    Services --> Prisma
+    Prisma --> PostgreSQL
+    Docs[Swagger Docs] --> Routes
+```
+
 ## Data Model
 
 ```mermaid
@@ -160,6 +171,21 @@ The summary service computes:
 - monthly trends
 
 This moves the dashboard aggregation logic into the backend, which keeps frontend clients simpler and ensures consistent calculations.
+
+## Deployment View
+
+The hosted review setup is designed so a reviewer can access the API without running a frontend locally.
+
+```mermaid
+flowchart LR
+    GH[GitHub Repository] --> Render[Render Web Service]
+    Render --> App[Node.js + Express API]
+    App --> DB[(PostgreSQL Database)]
+    Reviewer[Reviewer / Interviewer] --> Docs[Swagger Docs]
+    Reviewer --> Repo[README / Reviewer Guide]
+    Docs --> App
+    Repo --> GH
+```
 
 ## Trade-offs
 

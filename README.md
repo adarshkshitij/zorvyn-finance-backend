@@ -125,34 +125,48 @@ For a more guided review flow, see `REVIEWER_GUIDE.md`.
 ## Project Structure
 
 ```text
-zorvyn/
-+-- prisma/
-¦   +-- migrations/
-¦   +-- schema.prisma
-+-- src/
-¦   +-- config/
-¦   +-- controllers/
-¦   +-- docs/
-¦   +-- lib/
-¦   +-- middlewares/
-¦   +-- models/
-¦   +-- routes/
-¦   +-- schemas/
-¦   +-- services/
-¦   +-- types/
-¦   +-- utils/
-¦   +-- app.ts
-¦   +-- server.ts
-+-- tests/
-+-- .env.example
-+-- docker-compose.yml
-+-- jest.config.cjs
-+-- prisma.config.ts
-+-- REVIEWER_GUIDE.md
-+-- Zorvyn-Backend-Postman-Collection.json
-+-- package.json
-+-- package-lock.json
-+-- README.md
+zorvyn-finance-backend/
+├── src/
+│   ├── app.ts                # Express app setup
+│   ├── server.ts             # Server entry point
+│   ├── routes/               # Endpoint definitions
+│   ├── controllers/          # Request / response orchestration
+│   ├── services/             # Business logic and Prisma operations
+│   ├── middlewares/          # Auth, RBAC, validation, error handling
+│   ├── schemas/              # Zod validation schemas
+│   ├── docs/                 # Swagger configuration
+│   ├── config/               # Environment and app config
+│   ├── lib/                  # Shared infrastructure helpers
+│   ├── utils/                # Reusable utilities
+│   └── types/                # Shared TypeScript types
+├── prisma/
+│   ├── schema.prisma         # Database schema
+│   └── migrations/           # Migration history
+├── tests/                    # Automated API and infrastructure checks
+├── .github/workflows/        # CI workflow
+├── ARCHITECTURE.md           # Architecture and design notes
+├── REVIEWER_GUIDE.md         # Reviewer-focused quick start
+├── docker-compose.yml        # Local PostgreSQL setup
+├── .env.example              # Safe environment template
+└── README.md                 # Project overview and setup guide
+```
+
+This layout keeps request handling, business logic, validation, database access, and documentation clearly separated, which makes the backend easier to review and maintain.
+
+```mermaid
+flowchart TD
+    ROOT[zorvyn-finance-backend] --> SRC[src]
+    ROOT --> PRISMA[prisma]
+    ROOT --> TESTS[tests]
+    ROOT --> CI[.github/workflows]
+    ROOT --> DOCS[README + ARCHITECTURE + REVIEWER_GUIDE]
+    SRC --> ROUTES[routes]
+    SRC --> CONTROLLERS[controllers]
+    SRC --> SERVICES[services]
+    SRC --> MIDDLEWARES[middlewares]
+    SRC --> SCHEMAS[schemas]
+    SERVICES --> ORM[Prisma ORM]
+    ORM --> DB[(PostgreSQL)]
 ```
 
 ## Local Setup
@@ -330,6 +344,17 @@ A reviewer can verify the project without any frontend by following this order:
 7. `POST /api/records`
 8. `GET /api/records`
 9. `GET /api/summaries`
+
+```mermaid
+flowchart LR
+    A[GitHub Repository] --> B[README / Reviewer Guide]
+    B --> C[Hosted Swagger Docs]
+    C --> D[Register First Admin]
+    D --> E[Login and Authorize]
+    E --> F[Test Users APIs]
+    F --> G[Test Records APIs]
+    G --> H[Test Summary APIs]
+```
 
 ## Testing
 
