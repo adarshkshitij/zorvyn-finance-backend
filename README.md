@@ -154,7 +154,7 @@ flowchart TD
     ROOT --> PRISMA[prisma]
     ROOT --> TESTS[tests]
     ROOT --> CI[.github/workflows]
-    ROOT --> DOCS[docs (*.md)]
+    ROOT --> DOCS["docs (*.md)"]
     SRC --> ROUTES[routes]
     SRC --> CONTROLLERS[controllers]
     SRC --> SERVICES[services]
