@@ -3,9 +3,9 @@ import swaggerJSDoc from "swagger-jsdoc";
 const swaggerDefinition = {
   openapi: "3.0.0",
   info: {
-    title: "Zorvyn Finance Backend API",
+    title: "Finance Ledger Backend API",
     version: "1.0.0",
-    description: "Professional TypeScript + Prisma backend for finance data processing and access control."
+    description: "Professional TypeScript + Prisma backend for finance ledger management and access control."
   },
   servers: [
     {

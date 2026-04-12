@@ -1,7 +1,7 @@
 {
-  "name": "zorvyn-finance-backend",
+  "name": "finance-ledger-backend",
   "version": "1.0.0",
-  "description": "Production-style finance backend API with RBAC, analytics, Swagger docs, and a reviewer-friendly architecture (TypeScript + Express + PostgreSQL + Prisma).",
+  "description": "Production-style finance ledger backend API with RBAC, analytics endpoints, Swagger docs, and a reviewer-friendly architecture (TypeScript + Express + PostgreSQL + Prisma).",
   "main": "dist/src/server.js",
   "private": true,
   "engines": {

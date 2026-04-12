@@ -1,9 +1,9 @@
-# Zorvyn Finance Backend (API)
+# Finance Ledger Backend (API)
 
 A production-style finance backend API built with `TypeScript`, `Express`, `PostgreSQL`, and `Prisma`.
 It’s designed to be reviewer-friendly: clear layering, practical auth/RBAC, consistent validation + error handling, and Swagger-first API exploration.
 
-Built for the Zorvyn Backend Developer Internship assignment (backend-focused by design).
+Portfolio project (backend-focused by design).
 
 ## At a Glance (1–2 minutes)
 
@@ -11,9 +11,9 @@ Built for the Zorvyn Backend Developer Internship assignment (backend-focused by
 - **Where to start (review):** `REVIEWER_GUIDE.md`
 - **Key docs:** `ARCHITECTURE.md`, `DEPLOYMENT.md`, `OPERATIONS.md`, `DESIGN_NOTES.md`
 - **Main entry points:** `src/server.ts` (boot), `src/app.ts` (Express app), `prisma/schema.prisma` (data model)
-- **Live (hosted):**
-  - Health: `https://zorvyn-finance-backend-42za.onrender.com/api/health`
-  - Swagger: `https://zorvyn-finance-backend-42za.onrender.com/api/docs`
+- **Optional: Hosted (if deployed):**
+  - Health: `https://your-deployment.example.com/api/health`
+  - Swagger: `https://your-deployment.example.com/api/docs`
 
 ## Why This Project Stands Out
 
@@ -119,7 +119,7 @@ For a guided “review journey”, see `REVIEWER_GUIDE.md`.
 ## Project Structure
 
 ```text
-zorvyn-finance-backend/
+finance-ledger-backend/
 ├── src/
 │   ├── app.ts                # Express app setup
 │   ├── server.ts             # Server entry point
@@ -172,7 +172,7 @@ Create a `.env` file using `.env.example`.
 ```env
 NODE_ENV=development
 PORT=5000
-DATABASE_URL=postgresql://postgres:password@localhost:5432/zorvyn_finance
+DATABASE_URL=postgresql://postgres:password@localhost:5432/finance_ledger
 JWT_SECRET=replace_this_with_a_long_random_secret
 JWT_EXPIRES_IN=7d
 CLIENT_ORIGIN=*
@@ -186,7 +186,7 @@ If using Docker:
 docker compose up -d
 ```
 
-If using locally installed PostgreSQL, create a database named `zorvyn_finance` and update the password in `.env`.
+If using locally installed PostgreSQL, create a database named `finance_ledger` and update the password in `.env`.
 
 ### 3. Install Dependencies
 
@@ -219,10 +219,10 @@ Once the app is running:
 - Health check: `http://localhost:5000/api/health`
 - Swagger docs: `http://localhost:5000/api/docs`
 
-Hosted review URLs:
+Optional hosted URLs (if you deploy this API):
 
-- Health check: `https://zorvyn-finance-backend-42za.onrender.com/api/health`
-- Swagger docs: `https://zorvyn-finance-backend-42za.onrender.com/api/docs`
+- Health check: `https://your-deployment.example.com/api/health`
+- Swagger docs: `https://your-deployment.example.com/api/docs`
 
 ## API Modules
 
@@ -350,7 +350,7 @@ npm run build
 
 - `REVIEWER_GUIDE.md`
 - `ARCHITECTURE.md`
-- `Zorvyn-Backend-Postman-Collection.json`
+- `Finance-Ledger-API.postman_collection.json`
 - Swagger docs at `/api/docs`
 - `.env.example` for safe setup instructions
 
@@ -364,7 +364,7 @@ Upload these:
 - `.env.example`
 - `README.md`
 - `REVIEWER_GUIDE.md`
-- `Zorvyn-Backend-Postman-Collection.json`
+- `Finance-Ledger-API.postman_collection.json`
 - `docker-compose.yml`
 - `package.json`
 - `package-lock.json`
@@ -378,4 +378,3 @@ Do not upload:
 - `node_modules/`
 - `dist/`
 - real credentials or secrets
-

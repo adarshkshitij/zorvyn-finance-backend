@@ -1,8 +1,8 @@
 {
   "info": {
-    "name": "Zorvyn Backend API",
+    "name": "Finance Ledger Backend API",
     "_postman_id": "44d63610-f12d-4ee7-8b9c-2a2e5f1b5d10",
-    "description": "Postman collection for reviewing the Zorvyn finance backend assignment.",
+    "description": "Postman collection for reviewing the Finance Ledger Backend API.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [

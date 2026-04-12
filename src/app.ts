@@ -30,7 +30,7 @@ app.use(morgan(env.nodeEnv === "production" ? "combined" : "dev"));
 app.get("/", (_req, res) => {
   res.status(200).json({
     success: true,
-    message: "Zorvyn Finance Backend is running."
+    message: "Finance Ledger Backend API is running."
   });
 });
 

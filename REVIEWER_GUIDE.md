@@ -4,8 +4,8 @@ This project is a backend-only assignment and does not require a frontend applic
 
 ## 60-Second Review (Hosted)
 
-- Swagger docs: `https://zorvyn-finance-backend-42za.onrender.com/api/docs`
-- Health check: `https://zorvyn-finance-backend-42za.onrender.com/api/health`
+- Swagger docs: `https://your-deployment.example.com/api/docs`
+- Health check: `https://your-deployment.example.com/api/health`
 
 If you’re reviewing locally instead, follow the quick start below.
 
@@ -36,7 +36,7 @@ You can test the backend directly in the browser without building any frontend.
 
 ## Alternate Review Method
 
-Import `Zorvyn-Backend-Postman-Collection.json` into Postman and run the requests in order.
+Import `Finance-Ledger-API.postman_collection.json` into Postman and run the requests in order.
 
 ## Suggested API Review Order
 
@@ -56,4 +56,3 @@ Import `Zorvyn-Backend-Postman-Collection.json` into Postman and run the request
 - `DEPLOYMENT.md` — environment variables + migrations + deploy flow
 - `OPERATIONS.md` — runbook/troubleshooting
 - `DESIGN_NOTES.md` — scope, rationale, next improvements
-
